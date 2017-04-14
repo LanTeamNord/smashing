@@ -12,14 +12,14 @@ RUN apt-get update && \
     apt-get -y clean
 
 # Set up the default app
-RUN mkdir -p /vol/smashing
+RUN mkdir -p /vol/smashing-src
 COPY . /vol/smashing-src
 
 WORKDIR /vol/smashing-src
 RUN gem build smashing.gemspec
 RUN gem install ./smashing-1.0.0.gem bundler
 
-WORKDIR /vol/
+WORKDIR /vol
 RUN smashing new smashing && \
     cd /vol/smashing && \
     bundle && \
